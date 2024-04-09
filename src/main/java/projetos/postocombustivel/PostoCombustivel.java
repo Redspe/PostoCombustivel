@@ -21,9 +21,9 @@ public class PostoCombustivel {
                    Escolha uma opção: 
                      1. Abastecer
                    
-                     2. Menu Combustível
-                     3. Menu Tanque
-                     4. Menu Bomba
+                     2. Cadastrar Combustível
+                     3. Cadastrar Tanque
+                     4. Cadastrar Bomba
                    
                      5. Calcular faturamento total
                    
@@ -36,11 +36,11 @@ public class PostoCombustivel {
                 case 1 ->
                     abastecer();
                 case 2 ->
-                    menuCombustivel();
+                    Combustivel.cadastrar(listaCombs);
                 case 3 ->
-                    menuTanque();
+                    Tanque.cadastrar(listaTanques, listaCombs);
                 case 4 ->
-                    menuBomba();
+                    Bomba.cadastrar(listaBombas, listaTanques);
                 case 5 ->
                     calcularFaturamento();
                 case 9 ->
@@ -49,140 +49,6 @@ public class PostoCombustivel {
                     IO.println("Escolha uma opção válida!");
                     IO.aperteContinuar();
                 }
-            }
-        }
-    }
-
-    private static void menuCombustivel() {
-        boolean sair = false;
-
-        while (!sair) {
-            IO.clearConsole();
-            IO.println("  +-------- Sistema Posto Ipiranha --------+  ");
-            IO.println("""
-                   
-                   Escolha uma opção: 
-                     1. Cadastrar novo combustível
-                     2. Excluir tipo de combustível
-                     3. Editar preço do combustível
-                     
-                     4. Visualizar lista de combustíveis
-                   
-                     0. Voltar ao menu principal
-                   """);
-
-            int opc = IO.readInt("Digite o número: ");
-
-            switch (opc) {
-                case 1 ->
-                    Combustivel.cadastrar(listaCombs);
-
-                case 2 ->
-                    Combustivel.excluir(listaCombs);
-
-                case 3 ->
-                    Combustivel.editarPreco(listaCombs);
-
-                case 4 -> {
-                    Combustivel.listar(listaCombs);
-                    IO.aperteContinuar();
-                }
-
-                case 0 ->
-                    sair = true;
-
-                default -> {
-                    IO.println("Escolha uma opção válida!");
-                    IO.aperteContinuar();
-                }
-            }
-        }
-    }
-
-    private static void menuTanque() {
-        boolean sair = false;
-
-        while (!sair) {
-            IO.clearConsole();
-            IO.println("  +-------- Sistema Posto Ipiranha --------+  ");
-            IO.println("""
-                   
-                   Escolha uma opção: 
-                     1. Cadastrar um novo tanque
-                     2. Excluir um tanque
-                     3. Editar um tanque
-                     
-                     4. Visualizar lista de tanques
-                   
-                     0. Voltar ao menu principal
-                   """);
-
-            int opc = IO.readInt("Digite o número: ");
-
-            switch (opc) {
-                case 1 ->
-                    Tanque.cadastrar(listaTanques, listaCombs);
-
-                case 2 ->
-                    Tanque.excluir(listaTanques);
-
-                case 3 ->
-                    Tanque.editar(listaTanques);
-
-                case 4 -> {
-                    Tanque.listar(listaTanques);
-                    IO.aperteContinuar();
-                }
-
-                case 0 ->
-                    sair = true;
-
-                default ->
-                    IO.println("Escolha uma opção válida!");
-            }
-        }
-    }
-
-    private static void menuBomba() {
-        boolean sair = false;
-
-        while (!sair) {
-            IO.clearConsole();
-            IO.println("  +-------- Sistema Posto Ipiranha --------+  ");
-            IO.println("""
-                   
-                   Escolha uma opção: 
-                     1. Cadastrar novo tanque
-                     2. Excluir um tanque
-                     3. Editar um tanque
-                     
-                     4. Visualizar lista de tanques
-                   
-                     0. Voltar ao menu principal
-                   """);
-
-            int opc = IO.readInt("Digite o número: ");
-
-            switch (opc) {
-                case 1 ->
-                    Bomba.cadastrar(listaBombas, listaTanques);
-
-                case 2 ->
-                    Bomba.excluir(listaBombas);
-
-                case 3 ->
-                    Bomba.editar(listaBombas);
-
-                case 4 -> {
-                    Bomba.listar(listaBombas);
-                    IO.aperteContinuar();
-                }
-
-                case 0 ->
-                    sair = true;
-
-                default ->
-                    IO.println("Escolha uma opção válida!");
             }
         }
     }

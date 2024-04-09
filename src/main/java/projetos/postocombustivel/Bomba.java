@@ -48,37 +48,6 @@ public class Bomba {
 
     }
 
-    static void excluir(ArrayList<Bomba> listaBombas) {
-        if (!listaBombas.isEmpty()) {
-
-            IO.println("\nEscolha uma bomba: ");
-            listar(listaBombas); // Lista todos as bombas disponiveis
-
-            String msg = "\nDigite o número da bomba escolhido (ou 0 para sair): ";
-            String errorMsg = "Número inválido! Escolha um dos números disponívies acima.";
-            int opc = IO.chooseInRange(0, listaBombas.size(), msg, errorMsg) - 1;
-            if (opc == -1) {
-                return;
-            }
-            
-            if(IO.readSimNao("Tem certeza que deseja excluir a bomba escolhida?")) {
-                listaBombas.remove(opc);
-                IO.println("\nBomba excluída com sucesso!");
-            } else {
-                IO.println("\nCancelado!");
-            }
-            
-            IO.aperteContinuar();
-        } else {
-            IO.println("\nNão há nenhum tanque cadastrado no momento!");
-            IO.aperteContinuar();
-        }
-    }
-
-    static void editar(ArrayList<Bomba> listaBombas) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public static void listar(ArrayList<Bomba> listaBombas) {
         for (int i = 0; i < listaBombas.size(); i++) {
             IO.println("\nBomba " + listaBombas.get(i).getId() + ":");
