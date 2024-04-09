@@ -129,8 +129,10 @@ public class PostoCombustivel {
                 case 3 ->
                     Tanque.editar(listaTanques);
 
-                case 4 ->
+                case 4 -> {
                     Tanque.listar(listaTanques);
+                    IO.aperteContinuar();
+                }
 
                 case 0 ->
                     sair = true;
@@ -163,16 +165,18 @@ public class PostoCombustivel {
 
             switch (opc) {
                 case 1 ->
-                    Tanque.cadastrar(listaTanques, listaCombs);
+                    Bomba.cadastrar(listaBombas, listaTanques);
 
                 case 2 ->
-                    Tanque.excluir(listaTanques);
+                    Bomba.excluir(listaBombas);
 
                 case 3 ->
-                    Tanque.editar(listaTanques);
+                    Bomba.editar(listaBombas);
 
-                case 4 ->
-                    Tanque.listar(listaTanques);
+                case 4 -> {
+                    Bomba.listar(listaBombas);
+                    IO.aperteContinuar();
+                }
 
                 case 0 ->
                     sair = true;
@@ -193,41 +197,11 @@ public class PostoCombustivel {
         return idBomba;
     }
 
-    /**
-     * Cadastra uma nova bomba de combustivel no sistema
-     */
-    public static void cadastrarBomba() {
-        if (!listaTanques.isEmpty()) {
-
-            IO.println("\nEscolha um tanque: ");
-            Tanque.listar(listaTanques); // Lista todos os tanques disponiveis
-
-            String msg = "\nDigite o número do tanque escolhido (ou 0 para sair): ";
-            String errorMsg = "Número inválido! Escolha um dos números disponívies acima.";
-            int opc = IO.chooseInRange(0, listaTanques.size(), msg, errorMsg) - 1;
-            if (opc == -1) {
-                return;
-            }
-
-            Tanque tanqueEscolhido = listaTanques.get(opc);
-
-            Bomba novaBomba = new Bomba(proxIdBomba(), tanqueEscolhido, 0);
-            listaBombas.add(novaBomba);
-
-            IO.println("\nNova bomba cadastrada com sucesso!");
-            IO.aperteContinuar();
-        } else {
-            IO.println("\nNão há nenhum tanque cadastrado no momento!");
-            IO.aperteContinuar();
-        }
-
-    }
-
     public static void abastecer() {
         // escolher bomba e abastecer
         if (!listaBombas.isEmpty()) {
             IO.println("\nEscolha uma bomba (ou 0 para sair):");
-            Bomba.listarBombas(listaBombas);
+            Bomba.listar(listaBombas);
 
             String msg = "\nDigite o número da bomba escolhida: ";
             String errorMsg = "Número inválido! Escolha um dos números disponívies acima.";

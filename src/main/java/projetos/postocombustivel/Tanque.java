@@ -21,6 +21,9 @@ public class Tanque {
 
     /**
      * Cadastra um novo tanque de combustivel no sistema
+     * 
+     * @param listaTanques Lista de tanques em uso
+     * @param listaCombs Lista de combustiveis em uso
      */
     static void cadastrar(ArrayList<Tanque> listaTanques, ArrayList<Combustivel> listaCombs) {
         if (!listaCombs.isEmpty()) {
@@ -50,20 +53,80 @@ public class Tanque {
         }
     }
 
+    /**
+     * Exclui um tanque presente na lista
+     * 
+     * @param listaTanques Lista de tanques em uso
+     */
     static void excluir(ArrayList<Tanque> listaTanques) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!listaTanques.isEmpty()) {
+
+            IO.println("\nEscolha um tanque: ");
+            listar(listaTanques); // Lista todos as bombas disponiveis
+
+            String msg = "\nDigite o número do tanque escolhido (ou 0 para sair): ";
+            String errorMsg = "Número inválido! Escolha um dos números disponívies acima.";
+            int opc = IO.chooseInRange(0, listaTanques.size(), msg, errorMsg) - 1;
+            if (opc == -1) {
+                return;
+            }
+
+            if (IO.readSimNao("Tem certeza que deseja excluir o tanque escolhido?")) {
+                listaTanques.remove(opc);
+                IO.println("\nTanque excluído com sucesso!");
+            } else {
+                IO.println("\nCancelado!");
+            }
+
+            IO.aperteContinuar();
+        } else {
+            IO.println("\nNão há nenhum tanque cadastrado no momento!");
+            IO.aperteContinuar();
+        }
     }
 
-    static void editar(ArrayList<Tanque> listaTanques) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Permite editar um tanque ja existente no sistema
+     *
+     * @param listaTanques Lista de tanques em uso
+     * @param listaCombs Lista de combustiveis em uso
+     */
+    static void editar(ArrayList<Tanque> listaTanques, ArrayList<Combustivel> listaCombs) {
+        if (!listaTanques.isEmpty()) {
+            IO.println("\nEscolha um tipo de combustível: ");
+            listar(listaTanques); // Lista todos os combs disponiveis
+
+            String msg = "\nDigite o número do combustível escolhido (ou 0 para sair): ";
+            String errorMsg = "Número inválido! Escolha um dos números disponívies acima.";
+            int opc = IO.chooseInRange(0, listaTanques.size(), msg, errorMsg) - 1;
+            if (opc == -1) {
+                return;
+            }
+            listaTanques.get(opc).setTipo(listaCombs.get(opc));
+
+            double qtdLitros = IO.readDouble("Digite a nova quantidade de litros: ");
+            listaTanques.get(opc).setQtdLitros(qtdLitros);
+
+            IO.println("\nLitragem alterada com sucesso!");
+            IO.aperteContinuar();
+        } else {
+            IO.println("\nNão há nenhum tanque cadastrado no momento!");
+            IO.aperteContinuar();
+        }
+
     }
 
     public static void listar(ArrayList<Tanque> listaTanques) {
-        for (int i = 0; i < listaTanques.size(); i++) {
-            IO.println("\nTanque " + (i + 1) + ":");
-            IO.println("  Tipo: " + listaTanques.get(i).getTipo().getTipo());
-            IO.println("  Estado: " + listaTanques.get(i).getEstado());
-            IO.println("  Quantidade de litros: " + listaTanques.get(i).getQtdLitros());
+        if (!listaTanques.isEmpty()) {
+            for (int i = 0; i < listaTanques.size(); i++) {
+                IO.println("\nTanque " + (i + 1) + ":");
+                IO.println("  Tipo: " + listaTanques.get(i).getTipo().getTipo());
+                IO.println("  Estado: " + listaTanques.get(i).getEstado());
+                IO.println("  Quantidade de litros: " + listaTanques.get(i).getQtdLitros());
+            }
+        } else {
+            IO.println("\nNão há nenhum combustível cadastrado no momento!");
+            IO.aperteContinuar();
         }
     }
 

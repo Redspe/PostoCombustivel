@@ -1,6 +1,7 @@
 package projetos.postocombustivel;
 
 import java.util.ArrayList;
+import static projetos.postocombustivel.Bomba.listar;
 
 public class Combustivel {
 
@@ -37,8 +38,35 @@ public class Combustivel {
         IO.aperteContinuar();
     }
 
+    /**
+     * Exclui um combusivel presente na lista
+     * @param listaCombs Lista de combustiveis em uso
+     */
     static void excluir(ArrayList<Combustivel> listaCombs) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!listaCombs.isEmpty()) {
+
+            IO.println("\nEscolha um combustível: ");
+            listar(listaCombs); // Lista todos as bombas disponiveis
+
+            String msg = "\nDigite o número do combustível escolhido (ou 0 para sair): ";
+            String errorMsg = "Número inválido! Escolha um dos números disponívies acima.";
+            int opc = IO.chooseInRange(0, listaCombs.size(), msg, errorMsg) - 1;
+            if (opc == -1) {
+                return;
+            }
+
+            if (IO.readSimNao("Tem certeza que deseja excluir o combustível escolhido?")) {
+                listaCombs.remove(opc);
+                IO.println("\nCombustível excluído com sucesso!");
+            } else {
+                IO.println("\nCancelado!");
+            }
+
+            IO.aperteContinuar();
+        } else {
+            IO.println("\nNão há nenhum combustível cadastrado no momento!");
+            IO.aperteContinuar();
+        }
     }
 
     /**
