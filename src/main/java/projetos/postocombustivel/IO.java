@@ -158,4 +158,23 @@ public class IO {
 
         }
     }
+    
+    /**
+     * Pede uma resposta e sim ou não ao usuário
+     * @param msg Mensagem que será mostrada ao usuário
+     * @return 
+     */
+    public static boolean readSimNao(String msg) {
+        while (true) {
+            String entrada = readStr(msg);
+            if (entrada.contains("S") || entrada.contains("s")) {
+                return true;
+            } else if (entrada.contains("N") || entrada.contains("n")) {
+                return false;
+            } else {
+                IO.println("Opção inválida! Tente escrever S ou N.");
+            }
+        }        
+    }
+    
 }

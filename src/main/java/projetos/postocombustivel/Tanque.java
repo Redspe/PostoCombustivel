@@ -21,6 +21,9 @@ public class Tanque {
 
     /**
      * Cadastra um novo tanque de combustivel no sistema
+     * 
+     * @param listaTanques Lista de tanques em uso
+     * @param listaCombs Lista de combustiveis em uso
      */
     static void cadastrar(ArrayList<Tanque> listaTanques, ArrayList<Combustivel> listaCombs) {
         if (!listaCombs.isEmpty()) {
@@ -50,20 +53,17 @@ public class Tanque {
         }
     }
 
-    static void excluir(ArrayList<Tanque> listaTanques) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    static void editar(ArrayList<Tanque> listaTanques) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public static void listar(ArrayList<Tanque> listaTanques) {
-        for (int i = 0; i < listaTanques.size(); i++) {
-            IO.println("\nTanque " + (i + 1) + ":");
-            IO.println("  Tipo: " + listaTanques.get(i).getTipo().getTipo());
-            IO.println("  Estado: " + listaTanques.get(i).getEstado());
-            IO.println("  Quantidade de litros: " + listaTanques.get(i).getQtdLitros());
+        if (!listaTanques.isEmpty()) {
+            for (int i = 0; i < listaTanques.size(); i++) {
+                IO.println("\nTanque " + (i + 1) + ":");
+                IO.println("  Tipo: " + listaTanques.get(i).getTipo().getTipo());
+                IO.println("  Estado: " + listaTanques.get(i).getEstado());
+                IO.println("  Quantidade de litros: " + listaTanques.get(i).getQtdLitros());
+            }
+        } else {
+            IO.println("\nNão há nenhum combustível cadastrado no momento!");
+            IO.aperteContinuar();
         }
     }
 
